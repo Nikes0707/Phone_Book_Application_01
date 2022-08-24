@@ -38,7 +38,15 @@ public class PhoneBookServiceIMPL implements PhoneBookServiceI{
 	      Contact findById = phoneBookRepositry.findById(cid).get();
 	       return findById ;
 	      }
+
+	@Override
+	public boolean UpdateId(Contact contact ) {
+		Contact save = phoneBookRepositry.save(contact);
+		if (save != null ) {
+			return true ;
+		}
+		return false;
+	}
 	
-
-
+	
 }
