@@ -14,4 +14,6 @@ public interface PhoneBookServiceI {
 	Contact getById (Integer id);
 	
 	public boolean UpdateId (Contact contact );
+	
+	public boolean HardcodeddeletedById (Integer id);
 }

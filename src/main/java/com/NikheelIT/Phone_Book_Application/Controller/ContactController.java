@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,6 +30,8 @@ public class ContactController {
 		String msg= "Thise contacr are not save ";
 		return new ResponseEntity<>(msg,HttpStatus.BAD_REQUEST) ;
 	}
+	
+	
 	@GetMapping (value ="/getcontact", produces ="application/json")
 	public ResponseEntity<List<Contact>> getallresult (){
 	List<Contact> getallResult = phoneBookServiceIMPL.getallResult();
@@ -38,6 +41,8 @@ public class ContactController {
 		return new ResponseEntity<>(getallResult,HttpStatus.BAD_REQUEST);
 	}
 	}
+	
+	
 	@GetMapping (value = "/findbyid/{cid}",produces = "application/json")
 	public ResponseEntity<Contact> getFindById (@PathVariable Integer cid ){
 		Contact byId = phoneBookServiceIMPL.getById(cid);
@@ -46,6 +51,8 @@ public class ContactController {
 		}
 		return new ResponseEntity<Contact>(byId,HttpStatus.BAD_REQUEST);
 	}
+	
+	
 	@PutMapping(value = "/update" , consumes = "application/json")
 	public ResponseEntity<String> UpdateContact (@RequestBody  Contact contact){
 		boolean updateId = phoneBookServiceIMPL.UpdateId(contact);
@@ -59,4 +66,17 @@ public class ContactController {
 		}
 	}
 	
+	
+	@DeleteMapping (value = "/delete/{id}")
+	public ResponseEntity<String> deletebyid (@PathVariable Integer id){
+		boolean hardcodeddeletedById = phoneBookServiceIMPL.HardcodeddeletedById(id);
+		if (hardcodeddeletedById) {
+		String msg= "Id deleted successfully";
+		return new ResponseEntity<String>(msg,HttpStatus.OK);
+	}else {
+		String msg ="Id not delete ";
+		return new ResponseEntity<>(msg,HttpStatus.BAD_REQUEST);
+		
+	}
+}
 }

@@ -47,6 +47,16 @@ public class PhoneBookServiceIMPL implements PhoneBookServiceI{
 		}
 		return false;
 	}
+
+	@Override
+	public boolean HardcodeddeletedById(Integer id) {
+		boolean existsById = phoneBookRepositry.existsById(id);
+		if (existsById) {
+			phoneBookRepositry.deleteById(id);
+			return true ;
+		}
+		return false;
+	}
 	
 	
 }
