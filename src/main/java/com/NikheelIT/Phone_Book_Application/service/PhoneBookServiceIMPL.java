@@ -1,5 +1,9 @@
 package com.NikheelIT.Phone_Book_Application.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +21,15 @@ public class PhoneBookServiceIMPL implements PhoneBookServiceI{
 			 return true ;
 		 }
 		return false;
+	}
+
+	@Override
+	public List<Contact> getallResult() {
+		 List<Contact> findAll = phoneBookRepositry.findAll();
+//		 Stream<Contact> stream = findAll.stream();
+//		 Stream<Contact> filter = stream.filter(Contact -> Contact.getActiveSwitch()=='y');
+//		 List<Contact> collect = filter.collect(Collectors.toList());
+		return findAll;
 	}
 
 

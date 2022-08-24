@@ -1,8 +1,11 @@
 package com.NikheelIT.Phone_Book_Application.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +17,7 @@ import com.NikheelIT.Phone_Book_Application.service.PhoneBookServiceIMPL;
 public class ContactController {
 	@Autowired
 	private PhoneBookServiceIMPL phoneBookServiceIMPL ;
-	@PostMapping(value = "/save",produces = "application/json")
+	@PostMapping(value = "/save",produces ="application/json")
 	public ResponseEntity<String> saveContact (@RequestBody Contact contact) {
 		boolean saveContact = phoneBookServiceIMPL.saveContact(contact);
 		if (saveContact) {
@@ -24,5 +27,13 @@ public class ContactController {
 		String msg= "Thise contacr are not save ";
 		return new ResponseEntity<>(msg,HttpStatus.BAD_REQUEST) ;
 	}
-
+	@GetMapping (value ="/getcontact", produces ="application/json")
+	public ResponseEntity<List<Contact>> getallresult (){
+	List<Contact> getallResult = phoneBookServiceIMPL.getallResult();
+	if (getallResult != null) {
+		return new ResponseEntity<List<Contact>>(getallResult,HttpStatus.OK);
+	}else {
+		return new ResponseEntity<>(getallResult,HttpStatus.BAD_REQUEST);
+	}
+	}
 }
