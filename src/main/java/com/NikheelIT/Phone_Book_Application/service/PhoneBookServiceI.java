@@ -1,5 +1,9 @@
 package com.NikheelIT.Phone_Book_Application.service;
 
-public interface PhoneBookServiceI {
+ 
+import com.NikheelIT.Phone_Book_Application.model.Contact;
 
+public interface PhoneBookServiceI {
+	
+	public boolean saveContact(Contact contact);
 }
