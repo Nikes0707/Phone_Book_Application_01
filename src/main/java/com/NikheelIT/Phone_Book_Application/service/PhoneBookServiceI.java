@@ -10,4 +10,7 @@ public interface PhoneBookServiceI {
 	public boolean saveContact(Contact contact);
 	
 	List<Contact> getallResult();
+	
+	Contact getById (Integer id);
+	
 }

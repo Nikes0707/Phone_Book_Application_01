@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,4 +37,13 @@ public class ContactController {
 		return new ResponseEntity<>(getallResult,HttpStatus.BAD_REQUEST);
 	}
 	}
+	@GetMapping (value = "/findbyid/{cid}",produces = "application/json")
+	public ResponseEntity<Contact> getFindById (@PathVariable Integer cid ){
+		Contact byId = phoneBookServiceIMPL.getById(cid);
+		if (byId != null ){
+			return new ResponseEntity<Contact>(byId,HttpStatus.OK);
+		}
+		return new ResponseEntity<Contact>(byId,HttpStatus.BAD_REQUEST);
+	}
+	
 }
